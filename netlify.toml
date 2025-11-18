@@ -5,32 +5,6 @@
 
 # 环境变量说明
 # 请在 Netlify 网站设置 > Environment variables 中添加以下环境变量：
-# - VITE_SUPABASE_URL: 你的 Supabase 项目 URL
-# - VITE_SUPABASE_KEY: 你的 Supabase anon/public key
-
-# from: 指定要匹配的 URL 模式。这里匹配所有以 /api/ 开头的 URL。
-# to: 指定要重定向到的目标 URL。:splat 是一个占位符，用于捕获 from 中 * 匹配的部分。
-# 这里将 /api/* 重定向到 后端数据请求地址/*，并将 * 匹配的部分添加到目标 URL 中。
-# status: 指定 HTTP 重定向的状态码。200 表示“OK”，但在这里实际上是使用 Netlify 的代理功能，而不是真正的重定向。
-# 这允许 Netlify 代理请求到后端服务器，而不会更改浏览器地址栏中的 URL。
-# force: 指定是否强制执行重定向。设置为 true 表示即使有其他规则匹配，也强制执行此重定向。
-[[redirects]]
-from = "/api/*"
-to = "http://后端数据请求地址/:splat"
-status = 200
-force = true
-
-# 同样的规则，用于重定向 /upload/imgs/acc_img/ 下的图片请求。
-[[redirects]]
-from = "/upload/imgs/acc_img/*"
-to = "后端数据请求地址/upload/imgs/acc_img/:splat"
-status = 200
-force = true
-
-# 同样的规则，用于重定向 /upload/imgs/goods_img/ 下的图片请求。
-[[redirects]]
-from = "/upload/imgs/goods_img/*"
-to = "后端数据请求地址/upload/imgs/goods_img/:splat"
-status = 200
-force = true
+# - VITE_SUPABASE_URL:https://warqqawwpiegyvevbdjc.supabase.co
+# - VITE_SUPABASE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndhcnFxYXd3cGllZ3l2ZXZiZGpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwNDkwMTcsImV4cCI6MjA3ODYyNTAxN30.YMNNZ-P43_kW10crD-gN-LV6FHeMEHTEQE5UqA9IK0Q
 
