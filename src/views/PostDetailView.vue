@@ -19,7 +19,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ArticleDetail from '../components/ArticleDetail.vue'
-import { fetchPostById } from '../api/postService'
+import { fetchPostById, incrementPostViews } from '../api/postService'
 
 const route = useRoute()
 const router = useRouter()
@@ -27,12 +27,25 @@ const article = ref(null)
 const loading = ref(true)
 const error = ref('')
 
+let lastIncrementedId = null
+
 const loadPost = async (id) => {
   if (!id) return
   loading.value = true
   error.value = ''
   try {
     article.value = await fetchPostById(id)
+    if (article.value && lastIncrementedId !== id) {
+      lastIncrementedId = id
+      // 乐观更新阅读量
+      article.value.views = (article.value.views || 0) + 1
+      incrementPostViews(id).catch(() => {
+        // 如果后端未配置 RPC，则回退到原始值
+        if (article.value && article.value.id === id) {
+          article.value.views = Math.max(0, (article.value.views || 1) - 1)
+        }
+      })
+    }
   } catch (err) {
     error.value = err.message || '加载文章失败'
   } finally {
