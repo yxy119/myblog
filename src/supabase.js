@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.SUPABASE_URL
+const supabaseKey = import.meta.env.SUPABASE_ANON_KEY
 
 if (!supabaseUrl || !supabaseKey) {
   const errorMsg = 'Supabase 环境变量未配置，请在 .env 中设置 SUPABASE_URL 和 SUPABASE_ANON_KEY'
